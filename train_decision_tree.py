@@ -3,6 +3,7 @@ import numpy as np
 from sklearn import tree
 from sklearn.model_selection import train_test_split
 
+
 DATA = pd.read_csv("cleaned_whr.csv")
 
 def train_decision(df):
