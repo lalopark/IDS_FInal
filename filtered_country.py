@@ -3,6 +3,8 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def run():
     st.title("World Happiness Visualized")
@@ -40,18 +42,42 @@ def run():
     box = px.box(concat, x="Category", y=feature, title=f"Happy vs Unhappy Countries' {feature} Distribution")
     st.plotly_chart(box)
 
-    countries = cleaned_whr.groupby('Country name')['Country name'].count().index
-
-    st.markdown("#### **Select Country:**")
-    selected_country = []
-    selected_country.append(st.selectbox("Select a country to analyze", countries))
-    country_filtered = cleaned_whr[cleaned_whr["Country name"].isin(selected_country)]
-
-    min_year = country_filtered['year'].min()
-    max_year = country_filtered['year'].max()
-    year = st.slider("Year", min_year, max_year, value=min_year)
-
     st.markdown("#### **Select Year:**")
-    year_filtered = country_filtered[country_filtered["year"] == year]
 
-    st.write(year_filtered)
+    min_year = cleaned_whr['year'].min()
+    max_year = cleaned_whr['year'].max()
+    year = st.slider("Year", min_year, max_year, value=max_year)
+
+    year_filtered = cleaned_whr[cleaned_whr["year"] == year]
+
+    features = ['Log GDP per capita', 'Social support', 'Healthy life expectancy at birth', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+    x_feature = st.selectbox("Select a feature for the x axis", features, index=0)
+    y_feature = st.selectbox("Select a feature for the y axis", features, index=1)
+
+    fig = alt.Chart(year_filtered).mark_circle(size=60).encode(
+        x=x_feature,
+        y=y_feature,
+        color='Life Ladder',
+        tooltip=['Country name', 'Life Ladder'] + features
+        ).interactive()
+
+    st.altair_chart(fig, use_container_width=True)
+
+
+#     st.write(x_feature, y_feature)
+
+#     countries = cleaned_whr.groupby('Country name')['Country name'].count().index
+
+#     st.markdown("#### **Select Country:**")
+#     selected_country = []
+#     selected_country.append(st.selectbox("Select a country to analyze", countries))
+#     country_filtered = cleaned_whr[cleaned_whr["Country name"].isin(selected_country)]
+
+#     min_year = country_filtered['year'].min()
+#     max_year = country_filtered['year'].max()
+#     year = st.slider("Year", min_year, max_year, value=min_year)
+
+#     st.markdown("#### **Select Year:**")
+#     year_filtered = country_filtered[country_filtered["year"] == year]
+
+#     st.write(year_filtered)

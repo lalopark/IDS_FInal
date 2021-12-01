@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import altair as alt
-import global_happiness
+import general_viz
 import filtered_country
 import about
 import writeup
@@ -10,8 +10,8 @@ import dev_contact
 
 PAGES = {
     "About the Project": about,
-    "Global Happiness": global_happiness,
-    "Specific Country Happiness": filtered_country,
+    "General Vizualization": general_viz,
+    "Filtered Country Happiness": filtered_country,
     # "Machine Learning Results": test2,
     "Writeup": writeup,
     'Developer Contact': dev_contact
