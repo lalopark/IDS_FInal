@@ -10,6 +10,12 @@ def run():
                  "a Decision Tree, and a Random Forest. Since these models are interpetable,"
                  "we are able to see what the most important features are for Happiness")
 
+    # sentence edit
+    # make font size consistent 
+    # draw plots for each
+
+    
+
     dict_1 = {'Freedom to make life choices': 0.03926471494672855,
      'Generosity': .043878197820076,
      'Healthy life expectancy at birth': 0.667677972695485,

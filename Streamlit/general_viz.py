@@ -15,19 +15,23 @@ import pycountry
 
 
 def run():
+
+    st.header('General visualization')
+    # CHANGE THIS TITLE 
+
+    # make axis > SEE IF IT LOOKS GOOD. 
+
+    # add a aparaph or two after each plot
+
     path = 'Data/cleaned_whr.csv'
     df = pd.read_csv(path)
     # st.set_page_config(layout="wide")
 
-    # present df
-    st.subheader('What the Dataset Looks Like')
-
-    st.write(df.head())
 
     # top 10 bottom 10
     df_2021 = df[df['year']==2021]
     df_2021 = df_2021.sort_values(by=["Life Ladder"], ascending=False)
-    topk = botk = 10
+    topk = botk = 20
     top = df_2021.iloc[:topk]
     bot = df_2021.iloc[-botk:]
 
@@ -42,6 +46,9 @@ def run():
     st.plotly_chart(fig2) 
 
     # score over year
+    # BEN: create a year slider (2005 - 2021) 
+     
+    # include 2005 
     year_filtered_df = df[df['year'] != 2005]
     avg_happiness = pd.DataFrame(year_filtered_df.groupby(['year'])['Life Ladder'].mean()).reset_index()
 
@@ -54,6 +61,11 @@ def run():
     fig8.update_layout(bargap=0.2)
     st.subheader('Happiness Score Distribution for 2021')
     st.plotly_chart(fig8) 
+
+    # ben: aattempt slider 
+
+    #if not, country map: include 2005 
+    # su: change color to pink
 
     # country map 
     countries = {}
@@ -88,6 +100,9 @@ def run():
 
 
     # correlation amongst features: all 
+    # make color schemees consistnet (light vs dark)
+
+    # extend to 20 
     df_corr = df.drop('year',1).corr().round(2)
     fig4 = ff.create_annotated_heatmap(z=df_corr.to_numpy(), 
                                     x=df_corr.columns.tolist(),
@@ -110,6 +125,9 @@ def run():
                                     )
     st.subheader('Happiest Countries: Correlation Matrix Amongst Features')
     st.plotly_chart(fig5) 
+
+    # social support, freedom
+
 
     # correlation amongst features: unhappy 
     bot_corr = bot.drop('year',1).corr().round(2)

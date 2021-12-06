@@ -26,6 +26,10 @@ def run():
     st.text("We used our trained Random Forest model to predict how happy a country is.")
     st.text("Here we see how well it does.")
 
+    # pull up the button here
+    # add caption: on what you can do with the button 
+    # all three models and compare 
+
 
 
     def get_pred_score(feat_vals):

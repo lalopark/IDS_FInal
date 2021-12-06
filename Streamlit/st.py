@@ -12,7 +12,7 @@ import ml_sample_input
 
 PAGES = {
     "About the Project": about,
-    "General Vizualization": general_viz,
+    "General Visualization": general_viz,
     "Filtered Country Happiness": filtered_country,
     "Machine Learning": ml_page,
     "Machine Learning Survey": ml_sample_input,
