@@ -17,7 +17,7 @@ def run():
 
     with open("Models/linreg.pkl", "rb") as f:
         linreg = pickle.load(f)
-    st.set_page_config(layout="wide")
+    
     st.title("Predicting Happiness with Machine Learning")
 
     # Read dependecies
