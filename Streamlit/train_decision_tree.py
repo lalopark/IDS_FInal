@@ -4,7 +4,7 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 
 
-DATA = pd.read_csv("cleaned_whr.csv")
+DATA = pd.read_csv("Data/cleaned_whr.csv")
 
 def train_decision(df):
     clf = tree.DecisionTreeRegressor(random_state=0)
@@ -18,17 +18,5 @@ def train_decision(df):
     feature_importances = {(f_name, clf.feature_importances_[idx])for idx, f_name in enumerate(f_names)}
     return clf.score(X_test, y_test), feature_importances
 
-
-
-
 if __name__ == "__main__":
     train_decision(DATA)
-
-
-
-
-
-
-
-
-
