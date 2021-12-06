@@ -84,7 +84,7 @@ def run():
             var_name="Category", 
             value_name=feature)
 
-    box = px.box(concat, x="Category", y=feature, title=f"Happy vs Unhappy Countries' {feature} Distribution")
+    box = px.box(concat, x="Category", y=feature, title=f"{feature} Distribution")
     st.plotly_chart(box)
 
     """ 
