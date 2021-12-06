@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn import tree
 from sklearn.model_selection import train_test_split
-
+import pickle as pkl
+import matplotlib.pyplot as plt
 
 DATA = pd.read_csv("Data/cleaned_whr.csv")
 
@@ -16,6 +17,11 @@ def train_decision(df):
 
     f_names = X.columns.values
     feature_importances = {(f_name, clf.feature_importances_[idx])for idx, f_name in enumerate(f_names)}
+    with open("Models/tree.pkl", "wb") as f:
+        pkl.dump(clf, f)
+
+    tree.plot_tree(clf, max_depth=1)
+    plt.show()
     return clf.score(X_test, y_test), feature_importances
 
 if __name__ == "__main__":
