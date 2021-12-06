@@ -114,7 +114,8 @@ def run():
 
     st.caption("For Linear Regression, we treat the learned coefficients as rough estimates of the feature importance."
                " Also note that features were normalized before training which influence the coefficients that are learned. The R squared"
-               " score was 0.7799")
+               " score was 0.7799. The graph on the right demonstrates the relationship between the actual outputs "
+               "and the predictions from the model")
 
     col1, col2 = st.columns(2)
     col1.write(linear_df)
