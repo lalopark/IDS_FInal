@@ -5,6 +5,8 @@ import altair as alt
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 
 def run():
     st.title("World Happiness Visualized")
@@ -18,8 +20,12 @@ def run():
     unhappy = cleaned_whr.loc[cleaned_whr['Country name'].isin(unhappy_list)]
 
     features = ['Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Life Ladder', 'Social Support', 'Healthy life expectancy at birth']
+    countries = cleaned_whr['Country name'].unique()
+    country = st.selectbox("Select a country to analyze", countries)
     feature = st.selectbox("Select a feature to analyze", features)
 
+
+    """ 
     df_melt = happy.melt(id_vars='Country name', value_vars=feature)
     happy_fig = px.box(df_melt, x="Country name", y='value', title=f'Top 10 Unhappiest Countries: Level of self-reported {feature.lower()} by country')
     st.plotly_chart(happy_fig)
@@ -27,7 +33,47 @@ def run():
     df_melt = unhappy.melt(id_vars='Country name', value_vars=feature)
     unhappy_fig = px.box(df_melt, x="Country name", y='value', title=f'Top 10 Unhappiest Countries: Level of self-reported {feature.lower()} by country')
     st.plotly_chart(unhappy_fig)
+    """ 
 
+    # 1st plot 
+    df = cleaned_whr[cleaned_whr['Country name']==country]
+
+    # Create figure with secondary y-axis
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # Add traces
+    fig.add_trace(
+        go.Scatter(x=df['year'], y=df[str(feature)], name="Feature"),
+        secondary_y=False,
+    )
+
+    fig.add_trace(
+        go.Scatter(x=df['year'], y=df['Life Ladder'], name="Life Ladder"),
+        secondary_y=True,
+    )
+    
+    # Add figure title
+    fig.update_layout(
+        title_text=f"{country}'s {feature.lower()} and life ladder score over the years") 
+
+    # Set x-axis title
+    fig.update_xaxes(title_text="Year")
+
+    # Set y-axes titles
+    fig.update_yaxes(title_text="<b>Feature</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>Life Ladder</b>", secondary_y=True)
+
+    st.plotly_chart(fig)  
+
+
+    # 2nd plot  
+
+
+
+
+    # 3rd plot
+
+    st.write('For this analysis, we defined "happy countries" as countries with the life ladder score equal to or greater than 6.')
     happy = cleaned_whr.loc[cleaned_whr['Life Ladder']>= 6]
     unhappy = cleaned_whr.loc[cleaned_whr['Life Ladder']< 6]
     happy = happy.rename(columns={feature:f'Happy Countries'})
@@ -40,6 +86,8 @@ def run():
 
     box = px.box(concat, x="Category", y=feature, title=f"Happy vs Unhappy Countries' {feature} Distribution")
     st.plotly_chart(box)
+
+    """ 
 
     st.markdown("#### **Select Year:**")
 
@@ -80,3 +128,4 @@ def run():
 #     year_filtered = country_filtered[country_filtered["year"] == year]
 
 #     st.write(year_filtered)
+""" 
