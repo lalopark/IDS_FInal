@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 def run():
     st.title("World Happiness Visualized")
 
-    cleaned_whr = pd.read_csv('cleaned_whr.csv')
+    cleaned_whr = pd.read_csv('Data/cleaned_whr.csv')
 
     happy_list = ['Finland', 'Denmark','Switzerland','Iceland','Netherlands','Norway','Sweden','Luxembourg','New Zealand','Austria']
     unhappy_list = ['Burundi','Yemen','Tanzania','Haiti','Malawi','Lesotho','Botswana','Rwanda','Zimbabwe','Afghanistan']

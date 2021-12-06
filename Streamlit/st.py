@@ -7,17 +7,19 @@ import filtered_country
 import about
 import writeup
 import dev_contact
+import ml_page
+import ml_sample_input
 
 PAGES = {
     "About the Project": about,
     "General Vizualization": general_viz,
     "Filtered Country Happiness": filtered_country,
-    # "Machine Learning Results": test2,
+    "Machine Learning": ml_page,
+    "Machine Learning Survey": ml_sample_input,
     "Writeup": writeup,
     'Developer Contact': dev_contact
     }
 
-cleaned_whr = pd.read_csv('cleaned_whr.csv')
 st.sidebar.title('World Happiness Visualized')
 
 selection = st.sidebar.selectbox("Go to", list(PAGES.keys()))

@@ -15,7 +15,7 @@ import pycountry
 
 
 def run():
-    path = 'cleaned_whr.csv'
+    path = 'Data/cleaned_whr.csv'
     df = pd.read_csv(path)
     # st.set_page_config(layout="wide")
 
