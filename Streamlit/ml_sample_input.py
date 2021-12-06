@@ -48,3 +48,21 @@ st.write(f'Predicted Happiness Score: {np.around(pred_score, decimals=3)}/10')
 if st.button('Get new example'):
     sample_id = np.random.randint(0, high=len(df))
 
+
+with st.form(key="test"):
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
