@@ -3,11 +3,10 @@ import pandas as pd
 import pickle
 import streamlit as st
 
-import sklearn
 from sklearn.preprocessing import MinMaxScaler
 
 # Read dependecies
-df = pd.read_csv('cleaned_whr.csv')
+df = pd.read_csv('./Data/cleaned_whr.csv')
 df['year'] = df['year'].astype('int64')
 features = ['year', 'Log GDP per capita',
        'Social support', 'Healthy life expectancy at birth',
