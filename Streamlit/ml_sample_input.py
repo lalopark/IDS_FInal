@@ -119,7 +119,8 @@ def run():
 
     st.caption(
         "We also trained a decision tree on the same data with an R squared value of 0.74945. The importance of a feature is "
-        "computed as the (normalized) total reduction of the criterion brought by that feature")
+        "computed as the (normalized) total reduction of the criterion brought by that feature."
+        "The graph on the right shows the first few splits of the decision tree.")
 
     col3, col4 = st.columns(2)
     col3.write(decision_tree_df)
@@ -128,7 +129,8 @@ def run():
 
     st.caption(
         "Finally, our most powerful model was a Random Forest which has its feature importance values calculated in the same"
-        " way as a decision tree, but over all trees in the forest")
+        " way as a decision tree, but over all trees in the forest. The graph on the right "
+        "is again another depiction of the relationship between the actual outputs and the predictions from the model")
 
     col5, col6 = st.columns(2)
     col5.write(random_forest_df)
