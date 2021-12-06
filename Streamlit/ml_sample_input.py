@@ -7,17 +7,13 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-# make font size consistent
-# draw plots for each
-
-
 def run():
     with open("Models/tree.pkl", "rb") as f:
         clf_tree = pickle.load(f)
 
     with open("Models/linreg.pkl", "rb") as f:
         linreg = pickle.load(f)
-    
+
     st.title("Predicting Happiness with Machine Learning")
 
     # Read dependecies
