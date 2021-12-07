@@ -43,7 +43,7 @@ def run():
 
     # Add traces
     fig.add_trace(
-        go.Scatter(x=df['year'], y=df[str(feature)], name="Feature"),
+        go.Scatter(x=df['year'], y=df[str(feature)], name=f"{feature}"),
         secondary_y=False,
     )
 
