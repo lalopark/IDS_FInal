@@ -1,4 +1,4 @@
-pip 
+pip install --upgrade pip
 altair==4.1.0
 anyio @ file:///Users/runner/miniforge3/conda-bld/anyio_1636638537015/work/dist
 appnope @ file:///Users/runner/miniforge3/conda-bld/appnope_1635819660018/work
