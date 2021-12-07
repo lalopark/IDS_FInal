@@ -7,6 +7,7 @@ backports.zoneinfo==0.2.1
 base58==2.1.1
 numpy 
 matplotlib
+seaborn
 
 blinker==1.4
 Bottleneck==1.3.2
