@@ -8,7 +8,7 @@ def run():
     image = Image.open('plots/image.jpeg')
     st.image(image, caption='Sunrise by the mountains')
 
-    st.write("This project stems from our curiosity with how the world's happiness is changing over time. Specifically, \
+    st.write("This project stems from our curiosity with how the world's happiness has been changing over time. Specifically, \
         we want to see how happiness has changed over time and which qualitative and quantitative features contribute the most to a citizen's self-identified level of happiness.")
 
 

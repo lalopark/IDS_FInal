@@ -17,7 +17,7 @@ PAGES = {
     "Visualization at a Global Scale": general_viz,
     "Visualization on a Country Level": filtered_country,
     # "Machine Learning": ml_page,
-    "Machine Learning": ml_sample_input,
+    "Predicting Happiness using ML": ml_sample_input,
     # "Writeup": writeup,
     'Developer Contact': dev_contact
     }
