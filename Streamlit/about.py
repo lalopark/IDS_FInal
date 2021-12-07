@@ -6,7 +6,7 @@ def run():
     st.title('Project Motivation')
     # image : michael jackson (include globe image) - heal the world
     image = Image.open('plots/image.jpeg')
-    st.image(image, caption='Sunrise by the mountains')
+    st.image(image, caption='https://www.mjvibe.com/people-around-the-world-turns-to-michael-jacksons-music-to-comfort-each-other/')
 
     st.write("This project stems from our curiosity with how the world's happiness is changing over time. Specifically, \
         we want to analyze further what factors affect a country's happiness. ")
@@ -36,9 +36,11 @@ def run():
     'the national average of the binary responses (either 0 or 1) to the GWP question “If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them, or not?” ',
     'healthy life expectancies at birth',
     'the national average of responses to the GWP question “Are you satisfied or dissatisfied with your freedom to choose what you do with your life?” ',
-    'the residual of regressing national average of response to the GWP question “Have you donated money to a charity in the past month?” on GDP per capita.']
-    names = list(df.columns)[:-1]
-    dttypes = ["str", "int", "float", "float", "float", "float","float", "float"]
+    'the residual of regressing national average of response to the GWP question “Have you donated money to a charity in the past month?” on GDP per capita.',
+    'the national average of the survey responses to two questions in the GWP: “Is corruption widespread throughout the government or not” and “Is corruption widespread within businesses or not?” ']
+    names = list(df.columns)
+    dttypes = ["str", "int", "float", "float", "float", "float","float", "float",'float']
+    # print(df.describe())
 
     col_info = pd.DataFrame({'Name':names,
         'Data Types':dttypes,
