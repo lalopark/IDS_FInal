@@ -14,7 +14,7 @@ def run():
 
 # blurb about the dataset (paragraph)
     st.write(
-        "We used the World Happiness Report 2021 dataset, "
+        "We used the World Happiness Report 2021 dataset (https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021?select=world-happiness-report.csv), "
         "which surveyed the state of happiness in the world accross years and scores of other factors that will affect happiness in a country."
     )
 
