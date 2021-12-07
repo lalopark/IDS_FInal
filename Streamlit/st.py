@@ -7,15 +7,17 @@ import filtered_country
 import about
 import writeup
 import dev_contact
-import ml_page
+# import ml_page
 import ml_sample_input
+
+st.set_page_config(layout="wide")
 
 PAGES = {
     "About the Project": about,
     "General Visualization": general_viz,
     "Filtered Country Happiness": filtered_country,
-    "Machine Learning": ml_page,
-    "Machine Learning Survey": ml_sample_input,
+    # "Machine Learning": ml_page,
+    "Machine Learning": ml_sample_input,
     "Writeup": writeup,
     'Developer Contact': dev_contact
     }
