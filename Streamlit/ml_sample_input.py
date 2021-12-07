@@ -74,10 +74,10 @@ def run():
         corruption = st.slider(label="Perception of Corruption", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
 
         X = np.array([year, gdp, social_support, life_expect, freedom, generosity, corruption]).reshape(1, -1)
-        X = scaler.transform(X)
-        y_hat_rf = str(round(rf.predict(X)[0], 3))
+        X_transformed = scaler.transform(X)
+        y_hat_rf = str(round(rf.predict(X_transformed)[0], 3))
         y_hat_dt = str(round(clf_tree.predict(X)[0], 3))
-        y_hat_lr = str(round(linreg.predict(X)[0][0], 3))
+        y_hat_lr = str(round(linreg.predict(X_transformed)[0][0], 3))
         submit_form = st.form_submit_button(label='Try Our model!')
         if submit_form:
             st.success("Random Forest predicted {0}".format(y_hat_rf))
