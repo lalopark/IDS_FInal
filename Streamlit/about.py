@@ -9,7 +9,7 @@ def run():
     st.image(image, caption='Sunrise by the mountains')
 
     st.write("This project stems from our curiosity with how the world's happiness is changing over time. Specifically, \
-        we want to analyze further what factors affect a country's happiness. ")
+        we want to see how has happiness changed over time and what are the features that contribute the most to happiness.")
 
 
 # blurb about the dataset (paragraph)
