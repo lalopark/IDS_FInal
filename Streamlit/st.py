@@ -21,7 +21,7 @@ PAGES = {
     "Writeup": writeup,
     'Developer Contact': dev_contact
     }
-
+st.set_page_config(layout="wide")
 st.sidebar.title('World Happiness Visualized')
 
 selection = st.sidebar.selectbox("Go to", list(PAGES.keys()))
