@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 def run():
-    st.title("Visualization at a Global Scale")
+    st.title("Visualization on a Country Level")
 
     cleaned_whr = pd.read_csv('Data/cleaned_whr.csv')
 
