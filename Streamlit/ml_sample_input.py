@@ -34,11 +34,9 @@ def run():
     # Intro
     st.header('Happiness Score Prediction')
     st.write("We trained three interpretable models on our dataset: Linear Regression, "
-             "Decision Tree, and Random Forest. Each of these models are inherently interpretable."
-             " Thus, we are able to determine the importance of each feature on our prediction for happiness"
-             "for each of the three models")
-    st.write("Of all the models we trained, the Random Forest model had the highest R squared value (0.86) and we will now "
-             "demonstrate its performance on example data from our training set")
+             "Decision Tree, and Random Forest. All of these supervised models are inherently interpretable, which allow us to determine the importance of each feature on our prediction for each country's happiness score."
+             " Out of the three models we trained, the Random Forest model had the highest R squared value (0.86) and we will now "
+             "demonstrate its performance on example data from our training set.")
 
     # pull up the button here
     # add caption: on what you can do with the button
@@ -104,14 +102,14 @@ def run():
     with open("Models/feature_weights.pkl", "rb") as f:
         dict_3 = pickle.load(f)
 
-    linear_df = pd.DataFrame([dict_2], index=["Linear Regression"]).transpose()
-    decision_tree_df = pd.DataFrame([dict_1], index=["Decision Tree"]).transpose()
-    random_forest_df = pd.DataFrame([dict_3], index=["Random Forest"]).transpose()
+    linear_df = pd.DataFrame([dict_2], index=["Linear Regression"]).transpose().sort_values(by='Linear Regression', ascending=False)
+    decision_tree_df = pd.DataFrame([dict_1], index=["Decision Tree"]).transpose().sort_values(by='Decision Tree', ascending=False)
+    random_forest_df = pd.DataFrame([dict_3], index=["Random Forest"]).transpose().sort_values(by='Random Forest', ascending=False)
 
     st.caption("For Linear Regression, we treat the learned coefficients as rough estimates of the feature importance."
                " Also note that features were normalized before training which influence the coefficients that are learned. The R squared"
                " score was 0.7799. The graph on the right demonstrates the relationship between the actual outputs "
-               "and the predictions from the model")
+               "and the predictions from the model.")
 
     col1, col2 = st.columns(2)
     col1.write(linear_df)
@@ -120,7 +118,8 @@ def run():
     st.caption(
         "We also trained a decision tree on the same data with an R squared value of 0.74945. The importance of a feature is "
         "computed as the (normalized) total reduction of the criterion brought by that feature."
-        "The graph on the right shows the first few splits of the decision tree.")
+        "The graph on the right shows the first few splits of the decision tree."
+        "It's interesting to note that the Decision Tree model, unlike Linear Regression or the Random Forest, weights Healthy Life Expectancy much higher than the other features.")
 
     col3, col4 = st.columns(2)
     col3.write(decision_tree_df)
@@ -130,7 +129,7 @@ def run():
     st.caption(
         "Finally, our most powerful model was a Random Forest which has its feature importance values calculated in the same"
         " way as a decision tree, but over all trees in the forest. The graph on the right "
-        "is again another depiction of the relationship between the actual outputs and the predictions from the model")
+        "is again another depiction of the relationship between the actual outputs and the predictions from the model.")
 
     col5, col6 = st.columns(2)
     col5.write(random_forest_df)

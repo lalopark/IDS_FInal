@@ -17,7 +17,7 @@ import pycountry
 
 def run():
 
-    st.header('General visualization')
+    st.header('Visualization at a Global Scale')
     # CHANGE THIS TITLE 
 
     # make axis > SEE IF IT LOOKS GOOD. 
@@ -28,17 +28,17 @@ def run():
     df = pd.read_csv(path)
     # st.set_page_config(layout="wide")
 
-    st.markdown("#### **Select Year:**")
+    # st.markdown("#### **Select Year:**")
 
     min_year = df['year'].min()
     max_year = df['year'].max()
-    year = st.slider("Year", min_year, max_year, value=max_year)
+    year = st.slider("Select a year to investigate (hover over each dot to see which country it is)! ", min_year, max_year, value=max_year)
 
     year_filtered = df[df["year"] == year]
 
     features = ['Log GDP per capita', 'Social support', 'Healthy life expectancy at birth', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
-    x_feature = st.selectbox("Select a feature for the x axis", features, index=0)
-    y_feature = st.selectbox("Select a feature for the y axis", features, index=1)
+    x_feature = st.selectbox("Select a feature to plot on the x axis", features, index=0)
+    y_feature = st.selectbox("Select a feature to plot on the y axis", features, index=1)
 
     fig = alt.Chart(year_filtered).mark_circle(size=60).encode(
         x=x_feature,
@@ -64,22 +64,27 @@ def run():
     bot_asc = bot.sort_values(by=['Life Ladder'], ascending=False)
     fig2 = px.bar(bot_asc, y="Country name", x="Life Ladder", orientation='h',color="Life Ladder",color_continuous_scale='PuBu')
     st.subheader(f'Top 10 Unhappiest Countries in {year}')
-    st.plotly_chart(fig2, use_container_width=True) 
+    st.plotly_chart(fig2, use_container_width=True)
+
+    st.write("In the following two graphs, we look at the top 10 happiest and unhappiest countries. We can see roughly that many of the happiest countries are located in Europe, while many of the unhappy countries are developing.")
 
     # score over year
     # BEN: create a year slider (2005 - 2021) 
      
     # include 2005 
-    
+
     year_filtered_df = df[df['year'] != 2005]
     avg_happiness = pd.DataFrame(year_filtered_df.groupby(['year'])['Life Ladder'].mean()).reset_index()
 
     fig3 = px.line(avg_happiness, x="year", y="Life Ladder")
-    st.subheader('Average Happiness over time since 2006')
-    st.plotly_chart(fig3, use_container_width=True) 
+    st.subheader('Average Life Ladder Score over time since 2006')
+    st.plotly_chart(fig3, use_container_width=True)
+    
+    st.write("If we look at all the countries as a whole, we can track how overall global happiness has changed over time. We observe that the global population happiness increases from 2005-2010, after which it levels fairly off. Moreover, there is a spike in happiness score in 2020, which is interesting because it was at the time of the pandemic. After the spike, the happiness begins to normalize back again.")
+
 
     # histogram
-    st.markdown("#### **Select Year for Histogram:**")
+    st.subheader("Select a year to see the histogram distribution for:")
 
     min_year = df['year'].min()
     max_year = df['year'].max()
@@ -87,19 +92,15 @@ def run():
 
     year_filtered = df[df["year"] == year_hist]
 
-    # fig8 = px.histogram(df_2021, x= 'Life Ladder', nbins = 50)
     fig8 = px.histogram(year_filtered, x= 'Life Ladder', nbins = 50)
     fig8.update_layout(bargap=0.2)
-    st.subheader(f'Happiness Score Distribution for {year_hist}')
+    st.subheader(f'Life Ladder Score Distribution for {year_hist}')
     st.plotly_chart(fig8, use_container_width=True) 
 
-    # ben: attempt slider 
-
-    #if not, country map: include 2005 
-    # su: change color to pink
+    st.write("We can also look at the distribution of happiness across all countries over time. Roughly speaking, as time goes on, the distribution converges closer to a Gaussian distribution, with the mean gradually moving to the right.")
 
     # country map 
-    st.markdown("#### **Select Year for to Visualize Map:**")
+    st.subheader("Select a year to visualize the map of:")
 
     min_year = df['year'].min()
     max_year = df['year'].max()
@@ -134,71 +135,53 @@ def run():
         width=1500,
         #     height=400,
     )
-    st.subheader(f'Happiness Score (Life Ladder) in {year_map}')
+    st.subheader(f'Life Ladder Score in {year_map}')
     st.plotly_chart(fig7, use_container_width=True) 
 
-
-
+    st.write("Next, we can look at the happiness scores overlaid on a world map. An interesting thing to note here is that we begin collecting more and more data on more countries over time, as other countries participate in the survey. We can see again that the countries reporting lower values of happiness are located predominantly in Africa and in the Middle East while counties reporting higher values of happiness are located mostly in Europe, especially Scandinavia")
 
     # correlation amongst features: all 
     # make color schemes consistent (light vs dark)
 
-    # extend to 20 
     df_corr = df.drop('year',1).corr().round(2)
     fig4 = ff.create_annotated_heatmap(z=df_corr.to_numpy(), 
                                     x=df_corr.columns.tolist(),
                                     y=df_corr.columns.tolist(),
-                                    colorscale="RdBu",
+                                    colorscale=px.colors.sequential.Agsunset,
                                     hoverinfo="none", #Shows hoverinfo for null values
                                     showscale=True, ygap=1, xgap=1
                                     )
     st.subheader('Correlation Matrix Amongst Features')
-    st.plotly_chart(fig4, use_container_width=True) 
+    st.plotly_chart(fig4)
+
+    st.write("As you will see later on in the presentation, we will build ML models to predict happiness using the features below. Before using our data, we first examine the individual correlations between each of the features and Life Ladder (Happiness) as well as the correlations between the features. We can see that Life Ladder is surprisingly not very correlated with generosity, while the Log-GDP is quite correlated with Life Ladder. Additionally, as expected, as Log GDP increases, many other factors increase as well. Finally, it was surprising to note that freedom to make life choices is not very correlated with Life Happiness.")
 
     # correlation amongst features: happy 
     top_corr = top.drop('year',1).corr().round(2)
     fig5 = ff.create_annotated_heatmap(z=top_corr.to_numpy(), 
                                     x=top_corr.columns.tolist(),
                                     y=top_corr.columns.tolist(),
-                                    colorscale="RdBu",
+                                    colorscale=px.colors.sequential.RdPu,
                                     hoverinfo="none", #Shows hoverinfo for null values
                                     showscale=True, ygap=1, xgap=1
                                     )
     st.subheader('Happiest Countries: Correlation Matrix Amongst Features')
-    st.plotly_chart(fig5) 
+    st.plotly_chart(fig5)
+
+    st.write("We can perform the same analysis for just the top 10 happiest countries and see that there are some interesting differences. Specifically, the Log-GDP then has a -0.2 Pearson correlation, supporting the claim that increases in money may increase happiness for countries but only up to a certain point.")
 
     # social support, freedom
-
-
+    
     # correlation amongst features: unhappy 
     bot_corr = bot.drop('year',1).corr().round(2)
     fig6 = ff.create_annotated_heatmap(z=bot_corr.to_numpy(), 
                                     x=bot_corr.columns.tolist(),
                                     y=bot_corr.columns.tolist(),
-                                    colorscale="RdBu",
+                                    colorscale=px.colors.sequential.PuBu,
                                     hoverinfo="none", #Shows hoverinfo for null values
                                     showscale=True, ygap=1, xgap=1
                                     )
     st.subheader('Unhappiest Countries: Correlation Matrix Amongst Features')
-    st.plotly_chart(fig6) 
+    st.plotly_chart(fig6)
 
-    # sns.set()
-    # f, axs = plt.subplots(1, 2, figsize=(15, 8))
-    # sns.barplot(ax=axs[0], x=bot['Life Ladder'], y=bot['Country name'], color='red')
-    # sns.barplot(ax=axs[1], x=top['Life Ladder'], y=top['Country name'], color='blue')
-    # axs[0].set_xlabel('Life Ladder')
-    # axs[1].set_xlabel('Life Ladder')
-    # axs[0].set_ylabel('Countries')
-    # axs[1].set_ylabel('Countries')
-    # axs[0].set_title("Top 10 Least Happiest Countries")
-    # axs[1].set_title("Top 10 Happiest Countries")
-    # # f.tight_layout()
-    # st.pyplot(f)
-    #
-
-
-
-    #st.header('Top %d happiest countries'%topk)
-    #st.bar_chart(data=top['Life Ladder'], width=0, height=0, use_container_width=True)
-    #st.header('Top %d least happiest countries'%botk)
-    #st.bar_chart(data=bot['Life Ladder'], width=0, height=0, use_container_width=True)
+    st.write("Looking only at the unhappiest countries, we see another interesting relationship: social support is positively correlated with perceptions of corruption. Additionally, Log-GDP remains fairly uncorrelated with Life Ladder in the unhappy country case.")

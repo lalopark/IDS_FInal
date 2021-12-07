@@ -8,14 +8,14 @@ def run():
     image = Image.open('plots/image.jpeg')
     st.image(image, caption='https://www.mjvibe.com/people-around-the-world-turns-to-michael-jacksons-music-to-comfort-each-other/')
 
-    st.write("This project stems from our curiosity with how the world's happiness is changing over time. Specifically, \
-        we want to analyze further what factors affect a country's happiness. ")
+    st.write("This project stems from our curiosity with how the world's happiness has been changing over time. Specifically, \
+        we want to see how happiness has changed over time and which qualitative and quantitative features contribute the most to a citizen's self-identified level of happiness.")
 
 
 # blurb about the dataset (paragraph)
     st.write(
         "We used the World Happiness Report 2021 dataset, "
-        "which reviews the state of happiness in the world accross years and scores of other factors that will affect happiness in a country."
+        "which surveyed the state of happiness in the world accross years and scores of other factors that will affect happiness in a country."
     )
 
 # df.head (10 rows)

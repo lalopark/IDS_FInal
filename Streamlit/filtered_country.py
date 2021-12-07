@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 def run():
-    st.title("World Happiness Visualized")
+    st.title("Visualization at a Global Scale")
 
     cleaned_whr = pd.read_csv('Data/cleaned_whr.csv')
 
@@ -67,6 +67,32 @@ def run():
 
 
     # 2nd plot  
+    """ 
+    import plotly.express as px
+    
+    dot = df[df['year'] == 2021]['Life Ladder'] 
+    st.write(dot)
+
+    fig2 = px.box(cleaned_whr[cleaned_whr['year']==2021], y="Life Ladder")
+    fig2.add_trace(go.Box(y = [df[df['year'] == 2021]['Life Ladder']], 
+    name=f"{country}",
+    # jitter=0.3,
+    #pointpos=-1.8,
+    boxpoints='all', # represent all points
+    # marker_color='rgb(255,0,0)',
+    # line_color='rgb(255,0,255)',
+
+    line=dict(color='rgb(255,0,0)')
+))
+
+    st.plotly_chart(fig2) 
+    
+
+
+
+
+
+
 
 
 
@@ -87,7 +113,7 @@ def run():
     box = px.box(concat, x="Category", y=feature, title=f"{feature} Distribution")
     st.plotly_chart(box)
 
-    """ 
+     
 
     st.markdown("#### **Select Year:**")
 
