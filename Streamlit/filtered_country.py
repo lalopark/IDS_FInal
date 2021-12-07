@@ -19,7 +19,7 @@ def run():
     happy = cleaned_whr.loc[cleaned_whr['Country name'].isin(happy_list)]
     unhappy = cleaned_whr.loc[cleaned_whr['Country name'].isin(unhappy_list)]
 
-    features = ['Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Life Ladder', 'Social Support', 'Healthy life expectancy at birth']
+    features = ['Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Life Ladder', 'Social support', 'Healthy life expectancy at birth']
     countries = cleaned_whr['Country name'].unique()
     country = st.selectbox("Select a country to analyze", countries)
     feature = st.selectbox("Select a feature to analyze", features)
